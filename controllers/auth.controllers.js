@@ -3,6 +3,9 @@ import User from "../models/user.model.js";
 import generateTokenAndSetCookie from "../utils/generateToken.js";
 
 export const signup = async (req, res) => {
+
+	res.send("User registered successfully");
+	
 	try {
 		const { fullName, username, password, confirmPassword, gender } = req.body;
 
@@ -44,6 +47,8 @@ export const signup = async (req, res) => {
 		// Generate JWT Token
 		generateTokenAndSetCookie(newUser._id, res);
 
+
+
 		res.status(201).json({
 			_id: newUser._id,
 			fullName: newUser.fullName,
@@ -59,6 +64,8 @@ export const signup = async (req, res) => {
 
 
 export const login = async(req,res)=>{
+	res.send("User registered successfully");
+
     try{
        const {username, password} = req.body;
        const user = await User.findOne({username});
@@ -84,6 +91,8 @@ export const login = async(req,res)=>{
 }
 
 export const logout = (req,res)=>{
+	res.send("User registered successfully");
+
 	try {
 		res.cookie("jwt", "", { maxAge: 0 });
 		res.status(200).json({ message: "Logged out successfully" });
