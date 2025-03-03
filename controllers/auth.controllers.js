@@ -4,9 +4,9 @@ import generateTokenAndSetCookie from "../utils/generateToken.js";
 
 export const signup = async (req, res) => {
 
-	res.send("User registered successfully");
 	
 	try {
+	res.send("User registered successfully");
 		const { fullName, username, password, confirmPassword, gender } = req.body;
 
 		if (!fullName || !username || !password || !confirmPassword || !gender) {
@@ -56,6 +56,8 @@ export const signup = async (req, res) => {
 			profilePic: newUser.profilePic,
 		});
 	} catch (error) {
+			res.send("User registered failed");
+
 		console.log("Error in signup controller", error.message);
 		res.status(500).json({ error: "Internal Server Error" });
 	}
@@ -64,9 +66,9 @@ export const signup = async (req, res) => {
 
 
 export const login = async(req,res)=>{
-	res.send("User registered successfully");
 
     try{
+	res.send("User registered successfully");
        const {username, password} = req.body;
        const user = await User.findOne({username});
        const isPasswordcorrect = await bcrypt.compare(password,user?.password || "");
@@ -85,6 +87,8 @@ export const login = async(req,res)=>{
        });
     }
     catch(error){
+	    			res.send("User registered failed");
+
 		console.log("Error in login controller", error.message);
 		res.status(500).json({ error: "Internal Server Error" });
     }
